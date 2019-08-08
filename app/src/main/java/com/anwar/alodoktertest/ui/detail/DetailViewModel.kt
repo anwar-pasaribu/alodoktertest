@@ -1,13 +1,13 @@
-package com.anwar.alodoktertest.ui.home
+package com.anwar.alodoktertest.ui.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class HomeViewModel : ViewModel() {
+class DetailViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+        value = "This is detail Fragment"
     }
     val text: LiveData<String> = _text
 }

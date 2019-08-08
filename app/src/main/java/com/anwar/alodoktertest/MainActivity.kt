@@ -1,29 +1,51 @@
 package com.anwar.alodoktertest
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.anwar.alodoktertest.domain.Constants
+import com.anwar.alodoktertest.utils.SPHelper
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    private val navController by lazy { findNavController(R.id.nav_host_fragment) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
-        val navController = findNavController(R.id.nav_host_fragment)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+        val isLogin: Boolean = SPHelper.instance.getSharedPreferences(Constants.IS_LOGIN, false)
+
+        Log.i("MAIN", "Is login --> $isLogin")
+
+        showMainScreen()
+
+    }
+
+    private fun showMainScreen() {
+
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
+                R.id.navigation_home, R.id.navigation_profile
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+        nav_view.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            Log.i("MAIN", "Des --> ${controller.currentDestination?.label}")
+            when (controller.currentDestination?.id) {
+                R.id.navigation_home, R.id.navigation_profile -> {
+                    nav_view.visibility = View.VISIBLE
+                }
+                else -> nav_view.visibility = View.GONE
+            }
+        }
     }
 }
