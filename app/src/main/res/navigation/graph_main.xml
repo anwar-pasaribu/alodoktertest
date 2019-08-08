@@ -22,7 +22,24 @@
         android:id="@+id/navigation_home"
         android:name="com.anwar.alodoktertest.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+
+        <action android:id="@+id/action_open_hero_detail"
+            app:destination="@id/navigation_detail"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_detail"
+        android:name="com.anwar.alodoktertest.ui.detail.DetailFragment"
+        android:label="@string/title_detail"
+        tools:layout="@layout/fragment_detail">
+
+        <argument
+            android:name="hero_item"
+            app:argType="com.anwar.alodoktertest.domain.Hero"/>
+
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_profile"

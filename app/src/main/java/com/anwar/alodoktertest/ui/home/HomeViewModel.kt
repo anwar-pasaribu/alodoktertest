@@ -4,15 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.anwar.alodoktertest.data.StaticRepository
 import com.anwar.alodoktertest.domain.Hero
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(repo: StaticRepository) : ViewModel() {
 
-    val heroList: LiveData<MutableList<Hero>> = MutableLiveData<Hero>().apply {
-        val heroList = MutableList<Hero>
-        heroList.add(listOf<>())
-        value = heroList
-    }
+    val heroList: MutableLiveData<List<Hero>> = repo.getHeroes()
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is dashboard Fragment"

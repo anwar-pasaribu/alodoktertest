@@ -1,12 +1,16 @@
 package com.anwar.alodoktertest.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.anwar.alodoktertest.R
+import com.anwar.alodoktertest.utils.InjectorUtils
+import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
 
@@ -18,7 +22,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         homeViewModel =
-            ViewModelProviders.of(this).get(HomeViewModel::class.java)
+            ViewModelProviders.of(this, InjectorUtils.provideHomeViewModelFactory()).get(HomeViewModel::class.java)
 
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
@@ -30,7 +34,16 @@ class HomeFragment : Fragment() {
 
     private fun setupHomeList() {
 
-        homeViewModel.heroList
+        val adapter = HeroListAdapter()
+        rv_fragment_home.adapter = adapter
+
+        homeViewModel.heroList.observe(this, Observer {
+            it?.let {
+                heroList ->
+                Log.i("BLB", "List size: ${heroList.size}")
+                adapter.submitList(heroList)
+            }
+        })
 
     }
 }

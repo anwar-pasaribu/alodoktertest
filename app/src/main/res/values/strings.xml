@@ -2,8 +2,11 @@
     <string name="app_name">Test</string>
     <string name="title_login">Login</string>
     <string name="title_home">Home</string>
+    <string name="title_detail">Detail</string>
     <string name="title_profile">Profile</string>
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="btn_login">Masuk</string>
+    <string name="msg_email_not_valid">Email tidak valid :(</string>
+    <string name="msg_password_empty">Password kosong :(</string>
 </resources>

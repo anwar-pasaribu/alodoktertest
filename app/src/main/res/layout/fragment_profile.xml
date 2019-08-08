@@ -1,19 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/text_notifications"
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.anwar.alodoktertest.ui.profile.ProfileViewModel" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_margin="@dimen/padding_medium"
+        app:strokeColor="@color/colorPrimary"
+        app:cardElevation="@dimen/zero"
+        app:cardCornerRadius="@dimen/padding_medium"
+        app:strokeWidth="1dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin">
+
+            <ImageView
+                android:id="@+id/iv_fragment_profile_avatar"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:avatarFromUrl="@{viewModel.avatarUrl}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_person_black_24dp" />
+
+            <TextView
+                android:id="@+id/tv_fragment_profile_name"
+                style="?attr/textAppearanceHeadline5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                app:layout_constraintLeft_toRightOf="@id/iv_fragment_profile_avatar"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="@{viewModel.fullName}"
+                tools:text="Full Name" />
+
+            <TextView
+                android:id="@+id/tv_fragment_profile_gender"
+                style="?attr/textAppearanceBody1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                app:layout_constraintLeft_toRightOf="@id/iv_fragment_profile_avatar"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_fragment_profile_name"
+                android:text="@{viewModel.gender}"
+                tools:text="Gender" />
+
+            <TextView
+                android:id="@+id/tv_fragment_profile_phone"
+                style="?attr/textAppearanceBody1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                app:layout_constraintLeft_toRightOf="@id/iv_fragment_profile_avatar"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_fragment_profile_gender"
+                android:text="@{viewModel.phoneNumber}"
+                tools:text="Phone Number" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>
